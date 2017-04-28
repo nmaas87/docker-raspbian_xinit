@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Disable DPMS / Screen blanking
 xset -dpms

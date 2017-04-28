@@ -57,7 +57,7 @@ ENV INITSYSTEM on
 
 COPY src/start.sh /start.sh
 
-CMD ["bash", "/start.sh"]
-
+#CMD ["bash", "/start.sh"]
+ENTRYPOINT ["bash", "start.sh"]
 
 RUN [ "cross-build-end" ]  

@@ -1,4 +1,4 @@
-FROM nmaas87/docker-raspbian_qemu:jessie-20161202
+FROM nmaas87/docker-raspbian_qemu:jessie-20170426
 MAINTAINER Nico Maas <mail@nico-maas.de>
 ENV DEBIAN_FRONTEND noninteractive
 RUN [ "cross-build-start" ]
@@ -57,7 +57,7 @@ ENV INITSYSTEM on
 
 COPY src/start.sh /start.sh
 
-CMD ["bash", "/start.sh"]
-
+#CMD ["bash", "/start.sh"]
+ENTRYPOINT ["bash", "start.sh"]
 
 RUN [ "cross-build-end" ]  
