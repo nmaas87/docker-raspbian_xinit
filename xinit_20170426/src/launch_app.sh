@@ -1,4 +1,6 @@
 #!/bin/bash
+# Remove tmp.lock
+rm /tmp/.X0-lock &>/dev/null || true
 
 # Disable DPMS / Screen blanking
 xset -dpms

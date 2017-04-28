@@ -7,21 +7,13 @@ RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
         alsa-utils \
         xinput-calibrator \
-        autoconf \
-        build-essential \
-        git \
         openssh-server \
         xserver-xorg-core \
         xorg \
-        libgtk2.0-0 \
-        libnotify4 \
-        libgconf2-4 \
-        libnss3 \
         libasound2 \
         matchbox \
         sudo \
         locales \
-        whois \
         gedit \   
     && apt-get autoremove -qqy \
     && apt-get autoclean -y \
@@ -57,7 +49,6 @@ ENV INITSYSTEM on
 
 COPY src/start.sh /start.sh
 
-#CMD ["bash", "/start.sh"]
-ENTRYPOINT ["bash", "start.sh"]
+CMD ["bash", "/start.sh"]
 
 RUN [ "cross-build-end" ]  
