@@ -45,7 +45,7 @@ WORKDIR /usr/src/app
 COPY src /usr/src/app
 #RUN cd /usr/src/app && grunt build
 
-ENV INITSYSTEM on
+#ENV INITSYSTEM on
 
 COPY src/start.sh /start.sh
 
