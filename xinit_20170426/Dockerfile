@@ -1,7 +1,8 @@
-FROM nmaas87/docker-raspbian_qemu:jessie-20170426
+FROM resin/rpi-raspbian:jessie-20170426
+#FROM nmaas87/docker-raspbian_qemu:jessie-20170426
 MAINTAINER Nico Maas <mail@nico-maas.de>
 ENV DEBIAN_FRONTEND noninteractive
-RUN [ "cross-build-start" ]
+#RUN [ "cross-build-start" ]
 # Install basic system with gui
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
@@ -59,4 +60,4 @@ COPY src/start.sh /start.sh
 
 CMD ["bash", "/start.sh"]
 
-RUN [ "cross-build-end" ]  
+#RUN [ "cross-build-end" ]  
