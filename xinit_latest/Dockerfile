@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:jessie
+FROM nmaas87/docker-raspbian_qemu:latest
 MAINTAINER Nico Maas <mail@nico-maas.de>
 ENV DEBIAN_FRONTEND noninteractive
 RUN [ "cross-build-start" ]
