@@ -1,15 +1,20 @@
 #!/bin/bash
-# Remove tmp.lock
-rm /tmp/.X0-lock &>/dev/null || true
 
 # Disable DPMS / Screen blanking
 xset -dpms
 xset s off
 xset s noblank
 
-mkdir /root/.config
-sudo matchbox-window-manager -use_cursor yes -use_titlebar no &
+# Change Keyboard Layout from US to German
+setxkbmap de
+
+# Debug Tools
+#xinput --list
+#evtest
+
+# Start Window Manager
+sudo matchbox-window-manager -use_cursor yes -use_titlebar no & 
 #sudo matchbox-window-manager -use_cursor no -use_titlebar no &
-#npm start
+
+# Start Payload App
 gedit
-sleep 2s

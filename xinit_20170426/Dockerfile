@@ -2,26 +2,26 @@ FROM nmaas87/docker-raspbian_qemu:jessie-20170426
 MAINTAINER Nico Maas <mail@nico-maas.de>
 ENV DEBIAN_FRONTEND noninteractive
 RUN [ "cross-build-start" ]
+
 # Install basic system with gui
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
-        alsa-utils \
-        xinput-calibrator \
-        autoconf \
-        build-essential \
-        git \
+        apt-utils \
         openssh-server \
-        xserver-xorg-core \
+        xinput \
+        evtest \
+	evemu-tools \
+	libnss3 \
+        xinput-calibrator \
         xorg \
-        libgtk2.0-0 \
-        libnotify4 \
-        libgconf2-4 \
-        libnss3 \
-        libasound2 \
+        xserver-xorg-core \
         matchbox \
+        alsa-utils \
+        libasound2 \
         sudo \
+	whois \
         locales \
-        whois \
+	gir1.2-gtksource-3.0 \
         gedit \   
     && apt-get autoremove -qqy \
     && apt-get autoclean -y \
@@ -30,13 +30,15 @@ RUN apt-get update \
     && echo 'root:resin' | chpasswd \
     && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-# Gen Locales
+
+# Generate Locales
 RUN touch /usr/share/locale/locale.alias \
   && sed -i "s/^#\ \+\(de_DE.UTF-8\)/\1/" /etc/locale.gen \
   && locale-gen de_DE de_DE.UTF-8
-ENV LANG=de_DE.UTF-8 \
-  LC_ALL=de_DE.UTF-8 \
-  LANGUAGE=de_DE:de
+ENV LANG de_DE.UTF-8 \
+  LC_ALL de_DE.UTF-8 \
+  LANGUAGE de_DE:de
+
 # Add User pi
 RUN useradd \
   --groups=sudo \
@@ -46,17 +48,18 @@ RUN useradd \
   --password=$(mkpasswd pi) \
   pi \
   && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
-#ENTRYPOINT ["/usr/bin/tail", "-f", "/etc/hosts"]
 
+# copy program
 RUN mkdir -p /usr/src/app && ln -s /usr/src/app /app
 WORKDIR /usr/src/app
 COPY src /usr/src/app
-#RUN cd /usr/src/app && grunt build
 
+# copy service file, enable own service, disable resin launch service
+COPY src/xinit-docker.service /lib/systemd/system/xinit-docker.service
+RUN systemctl enable xinit-docker.service
+RUN systemctl disable launch.service
+
+# start init system
 ENV INITSYSTEM on
 
-COPY src/start.sh /start.sh
-
-CMD ["bash", "/start.sh"]
-
-RUN [ "cross-build-end" ]
+RUN [ "cross-build-end" ]  
