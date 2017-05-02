@@ -10,6 +10,8 @@ RUN apt-get update \
         openssh-server \
         xinput \
         evtest \
+	evemu-tools \
+	libnss3 \
         xinput-calibrator \
         xorg \
         xserver-xorg-core \
@@ -28,10 +30,6 @@ RUN apt-get update \
     && echo 'root:resin' | chpasswd \
     && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-#         evemu-tools \
-#         libgtk2.0-0 \
-#        libnss3 \
 
 # Generate Locales
 RUN touch /usr/share/locale/locale.alias \
