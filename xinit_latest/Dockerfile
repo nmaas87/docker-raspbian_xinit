@@ -4,24 +4,20 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN [ "cross-build-start" ]
 
 # Install basic system with gui
-# && apt-get install -yq --no-install-recommends \
-#     && apt-get install -yq \
 RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
         apt-utils \
+        openssh-server \
         xinput \
         evtest \
-        evemu-tools \
-        alsa-utils \
         xinput-calibrator \
-        openssh-server \
-        xserver-xorg-core \
         xorg \
-        libgtk2.0-0 \
-        libnss3 \
-        libasound2 \
+        xserver-xorg-core \
         matchbox \
+        alsa-utils \
+        libasound2 \
         sudo \
+	whois \
         locales \
 	gir1.2-gtksource-3.0 \
         gedit \   
@@ -33,13 +29,9 @@ RUN apt-get update \
     && sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
-#RUN apt-get update \
-#    && apt-get install --reinstall -yq \
-#	dbus \
-#	dbus-x11 \
-#	libdbus-1-dev \
-#	dconf \
-#	dconf-editor 
+#         evemu-tools \
+#         libgtk2.0-0 \
+#        libnss3 \
 
 # Generate Locales
 RUN touch /usr/share/locale/locale.alias \
