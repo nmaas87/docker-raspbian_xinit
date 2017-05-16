@@ -10,8 +10,8 @@ RUN apt-get update \
         openssh-server \
         xinput \
         evtest \
-	evemu-tools \
-	libnss3 \
+      	evemu-tools \
+      	libnss3 \
         xinput-calibrator \
         xorg \
         xserver-xorg-core \
@@ -19,9 +19,9 @@ RUN apt-get update \
         alsa-utils \
         libasound2 \
         sudo \
-	whois \
+      	whois \
         locales \
-	gir1.2-gtksource-3.0 \
+      	gir1.2-gtksource-3.0 \
         gedit \   
     && apt-get autoremove -qqy \
     && apt-get autoclean -y \
