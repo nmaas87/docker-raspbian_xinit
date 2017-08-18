@@ -15,6 +15,7 @@ RUN apt-get update \
         xinput-calibrator \
         xorg \
         xserver-xorg-core \
+        xserver-xorg-input-evdev \
         matchbox \
         alsa-utils \
         libasound2 \
