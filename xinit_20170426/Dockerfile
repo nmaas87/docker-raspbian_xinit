@@ -51,6 +51,10 @@ RUN useradd \
   pi \
   && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
+# copy tools fbcp and raspi2fb
+COPY tools/* /usr/local/bin/
+RUN chmod +x /usr/local/bin/fbcp && chmod +x /usr/local/bin/raspi2fb
+
 # copy program
 RUN mkdir -p /usr/src/app && ln -s /usr/src/app /app
 WORKDIR /usr/src/app
