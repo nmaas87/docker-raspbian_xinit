@@ -8,6 +8,7 @@ RUN apt-get update \
     && apt-get install -yq --no-install-recommends \
         apt-utils \
         openssh-server \
+        libraspberrypi0 \
         xinput \
         evtest \
       	evemu-tools \
