@@ -23,8 +23,7 @@ RUN apt-get update \
         sudo \
       	whois \
         locales \
-      	gir1.2-gtksource-3.0 \
-        gedit \   
+      	xterm \
     && apt-get autoremove -qqy \
     && apt-get autoclean -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/* && mkdir /var/lib/apt/lists/partial \
