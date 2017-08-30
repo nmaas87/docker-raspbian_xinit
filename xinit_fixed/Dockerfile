@@ -1,4 +1,4 @@
-FROM nmaas87/docker-raspbian_qemu:latest
+FROM nmaas87/docker-raspbian_qemu:fixed
 MAINTAINER Nico Maas <mail@nico-maas.de>
 ENV DEBIAN_FRONTEND noninteractive
 RUN [ "cross-build-start" ]
